@@ -1,0 +1,3 @@
+Para la elaboración de este informe se revisó la documentación oficial de Apache HBase, lo que proporcionó una comprensión básica sobre cómo funciona HBase, sus ventajas y cómo se compara con otros sistemas de base de datos NoSQL. También se consultaron blogs técnicos y recursos en páginas como Cloudera's Blog y Data-Flair para entender mejor el uso de HBase en escenarios reales.
+
+Con el objetivo de brindar un enfoque práctico, se desarrolló una implementación basada en comandos de bash y directivas específicas de HBase. Esta implementación nos permitió ilustrar de manera tangible el método de acceso y manipulación de datos en HBase, destacando las ventajas que este sistema ofrece en términos de eficiencia y versatilidad para el almacenamiento y consulta de datos.
