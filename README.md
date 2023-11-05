@@ -80,9 +80,36 @@ import boto3
 redshift_client = boto3.client('redshift', region_name='us-west-2')
 
 # Crea un clúster de Redshift
-response = redshift_client.create_cluster(
+response_create = redshift_client.create_cluster(
     ClusterType='multi-node',
     NodeType='ra3.4xlarge',
     NumberOfNodes=2,
     MasterUsername='user',
     MasterUserPassword='password',
+    DBName='database',
+    ClusterIdentifier='idcluster',
+    IamRoles=['arn:aws:iam::123456789012:role/RedshiftRole']
+)
+
+# Espera a que el clúster se cree y esté disponible
+waiter = redshift_client.get_waiter('cluster_available')
+waiter.wait(ClusterIdentifier='identificador_cluster')
+
+# Lista los clústeres existentes
+response_list = redshift_client.describe_clusters()
+clusters = response_list['Clusters']
+for cluster in clusters:
+    print(f"Cluster ID: {cluster['ClusterIdentifier']}, Status: {cluster['ClusterStatus']}")
+
+# Modifica un clúster existente (por ejemplo, cambiar el tipo de nodo)
+response_modify = redshift_client.modify_cluster(
+    ClusterIdentifier='identificador_cluster',
+    NodeType='ra3.xlplus',
+    NumberOfNodes=3,  # Escala el clúster a 3 nodos
+)
+
+# Elimina un clúster de Redshift
+response_delete = redshift_client.delete_cluster(
+    ClusterIdentifier='identificador_cluster',
+    SkipFinalClusterSnapshot=True 
+)
